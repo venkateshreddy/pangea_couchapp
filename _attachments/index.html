@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pangea Queue CouchAPP</title>
+    <link rel="stylesheet" href="style/main.css" type="text/css">
+  </head>
+  <body>
+<!-- 
+    <div id="sidebar">
+      <p>Edit welcome message.</p>
+      <p>Ideas: You could easily turn this into a photo sharing app, 
+          or a grocery list, or a chat room. <a href="https://github.com/couchapp/example">Code for this app is on Github.</a></p>
+    </div> -->
+  </body>
+  <script src="/_utils/script/sha1.js"></script>
+  <script src="/_utils/script/json2.js"></script>
+  <script src="/_utils/script/jquery.js"></script>
+  <script src="/_utils/script/jquery.couch.js"></script>
+  <script src="vendor/couchapp/jquery.couchLogin.js"></script>
+  <script src="vendor/couchapp/jquery.couchProfile.js"></script>
+  <script src="vendor/couchapp/md5.js"></script>
+  <script src="vendor/couchapp/jquery.mustache.js"></script>
+
+<!-- templates used by app.js -->
+    <div id="heading">
+      <h3>Queue Debugging Tool</h3>
+    </div>
+    <div id="search_div">
+      <span id="loading_img" style="border:none;visibility:hidden;"><img src="images/ajax-loader.gif" style="width:17px;" /></span>
+      <span id="counter"></span>
+      <span>Token: <input style="width: 120px;" type="text" id="search_token" /></span>
+      <span>Data: <input style="width: 120px;" type="text" id="data_temp" /></span>
+      <span>Method: <input style="width: 120px;" type="text" id="method_name" /></span>
+      <span>Get/Post: 
+        <select id="request_type">
+          <option value="">All</option>
+          <option value="get">Get</option>
+          <option value="post">Post</option>
+        </select>
+      </span>
+      <span>Act Inmedia: <input style="width: 120px;" type="text" id="account_id" /></span>
+      <span>Latest:  
+        <select id="documents_count">
+          <option value="50">50</option>
+          <option value="100" selected=selected>100</option>
+          <option value="200">200</option>
+          <option value="500">500</option>
+          <option value="1000">1000</option>
+        </select>
+      </span>
+    </div>
+    <div id="content"></div>
+
+  <script id="recent-messages" type="text/x-mustache" charset="utf-8">
+        <ul id="items">
+          {{#items}}
+            <li id={{_id}} class={{method}}-{{type}} name={{url}} >
+              <div>
+                  <span class="lbl">Token:</span> {{_id}}
+              </div>
+              <div>
+                  <span class="lbl">URL:</span> {{url}}
+              </div>
+              <div>
+                  <span class="lbl">Method:</span> {{method}} - {{type}}
+              </div>
+              <div>
+                  <span class="lbl">AccessToken:</span> {{access_token}}
+              </div>
+              <p><span class="lbl">Data:</span> {{data}}</p>
+              <div style="clear:left;"></div>
+            </li>
+          {{/items}}
+        </ul>
+        
+  </script>
+  <script src="script/app.js"></script>
+
+</html>
