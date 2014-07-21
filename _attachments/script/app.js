@@ -55,6 +55,7 @@ $(function() {
                 });
                 $("#content").html(them);
                 $("#loading_img").css("visibility","hidden");
+                clearFields();
             }
         });
     };
@@ -76,6 +77,7 @@ $(function() {
     var request_type = "";
     var account_id = "";
     var data_temp = "";
+    var response_temp = "";
     $("#search_token").keyup(function(){
         search_token = $(this).val();
         filterDocuments();
@@ -92,23 +94,37 @@ $(function() {
         data_temp = $(this).val();
         filterDocuments();
     });
+    $("#response_temp").keyup(function(){
+        response_temp = $(this).val();
+        filterDocuments();
+    });
     
     $("#request_type").change(function(){
         request_type = $(this).val();
         filterDocuments();
     });
+    function clearFields(){
+        $("#search_token").val("");
+        $("#method_name").val("");
+        $("#account_id").val("");
+        $("#data_temp").val("");
+        $("#response_temp").val("");
+        $("#request_type").selectedIndex = 0;
+    }
     function filterDocuments(){
         var counter_temp = 0;
         $("#items li").each(function(){
             var classname = $(this).attr('class');
             var i_d = $(this).attr('id');
             var name = $(this).attr('name');
-            var doc_data  = $(this).children("p").text();
+            var doc_data  = $(this).children("p").first().text();
+            var doc_response =  $(this).children("p").last().text();
             if(name.indexOf(account_id) >= 0 && 
                 classname.indexOf(method_name) >= 0 && 
                 classname.indexOf(request_type) >= 0 && 
                 i_d.indexOf(search_token) >= 0 &&
-                doc_data.indexOf(data_temp) >= 0
+                doc_data.indexOf(data_temp) >= 0 &&
+                doc_response.indexOf(response_temp) >= 0
             )
             {
                $(this).show(); 

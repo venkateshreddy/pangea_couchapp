@@ -28,9 +28,10 @@
     <div id="search_div">
       <span id="loading_img" style="border:none;visibility:hidden;"><img src="images/ajax-loader.gif" style="width:17px;" /></span>
       <span id="counter"></span>
-      <span>Token: <input style="width: 120px;" type="text" id="search_token" /></span>
-      <span>Data: <input style="width: 120px;" type="text" id="data_temp" /></span>
-      <span>Method: <input style="width: 120px;" type="text" id="method_name" /></span>
+      <span>Token: <input style="width: 100px;" type="text" id="search_token" /></span>
+      <span>Response: <input style="width: 100px;" type="text" id="response_temp" /></span>
+      <span>Data: <input style="width: 100px;" type="text" id="data_temp" /></span>
+      <span>Method: <input style="width: 100px;" type="text" id="method_name" /></span>
       <span>Get/Post: 
         <select id="request_type">
           <option value="">All</option>
@@ -38,7 +39,7 @@
           <option value="post">Post</option>
         </select>
       </span>
-      <span>Act Inmedia: <input style="width: 120px;" type="text" id="account_id" /></span>
+      <span>Inmedia: <input style="width: 100px;" type="text" id="account_id" title="account or page inmedia" /></span>
       <span>Latest:  
         <select id="documents_count">
           <option value="50">50</option>
@@ -46,6 +47,9 @@
           <option value="200">200</option>
           <option value="500">500</option>
           <option value="1000">1000</option>
+          <option value="1500">1500</option>
+          <option value="2000">2000</option>
+          <option value="2500">2500</option>
         </select>
       </span>
     </div>
@@ -68,6 +72,7 @@
                   <span class="lbl">AccessToken:</span> {{access_token}}
               </div>
               <p><span class="lbl">Data:</span> {{data}}</p>
+              <p><span class="lbl">Response:</span> {{response}}</p>
               <div style="clear:left;"></div>
             </li>
           {{/items}}
@@ -75,5 +80,4 @@
         
   </script>
   <script src="script/app.js"></script>
-
 </html>

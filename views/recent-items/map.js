@@ -5,7 +5,8 @@ function(doc) {
       type : doc.request_type,
       method : doc.method_name,
       access_token : doc.access_token,
-      data : decodeURIComponent(doc.data)
+      data : decodeURIComponent(doc.data),
+      response : doc.response
 });
  
 };
