@@ -24,10 +24,11 @@ $(function() {
     var items_limit = 100;
     var items_skip = 0;
     var total_rows_count = 0;
-    function drawTodayItems(skip , limit) {
+    var view_name = "today_documents";
+    function drawItems(skip , limit) {
         //console.log(design);
         $("#loading_img").css("visibility","visible");
-        db.view(design + "/today_documents", {
+        db.view(design + "/"+view_name, {
             descending : "true",
             limit : limit,
             skip : skip,
@@ -46,29 +47,7 @@ $(function() {
             }
         });
     };
-    function drawYesterdayItems(skip , limit) {
-        //console.log(design);
-        $("#loading_img").css("visibility","visible");
-        db.view(design + "/yesterday_documents", {
-            descending : "true",
-            limit : limit,
-            skip : skip,
-            update_seq : true,
-            success : function(data) {
-                //setupChanges(data.update_seq);
-                total_rows_count = data.total_rows;
-                fetched_rows_count = data.rows.length;
-                $("#counter").text(fetched_rows_count+" results");
-                var them = $.mustache($("#recent-messages").html(), {
-                    items : data.rows.map(function(r) {return r.value;})
-                });
-                $("#content").html(them);
-                $("#loading_img").css("visibility","hidden");
-                clearFields();
-            }
-        });
-    };
-    drawTodayItems(items_skip, items_limit);
+    drawItems(items_skip, items_limit);
     var changesRunning = false;
     function setupChanges(since) {
         if (!changesRunning) {
@@ -107,7 +86,15 @@ $(function() {
         response_temp = $(this).val();
         filterDocuments();
     });
-    
+    $("#day_type").change(function(){
+        if($(this).val() == '2'){
+            view_name = "yesterday_documents";
+        }
+        else{
+            view_name = "today_documents";
+        }
+        drawItems();
+    });
     $("#request_type").change(function(){
         request_type = $(this).val();
         filterDocuments();
