@@ -20,27 +20,14 @@ $(function() {
     var path = unescape(document.location.pathname).split('/'),
         design = path[3],
         db = $.couch.db(path[1]);
-    /*function drawItems() {
-        db.view(design + "/recent-items", {
-            descending : "true",
-            limit : 50,
-            update_seq : true,
-            success : function(data) {
-                setupChanges(data.update_seq);
-                var them = $.mustache($("#recent-messages").html(), {
-                    items : data.rows.map(function(r) {return r.value;})
-                });
-                $("#content").html(them);
-            }
-        });
-    };*/
+
     var items_limit = 100;
     var items_skip = 0;
     var total_rows_count = 0;
-    function drawItems(skip , limit) {
+    function drawTodayItems(skip , limit) {
         //console.log(design);
         $("#loading_img").css("visibility","visible");
-        db.view(design + "/recent-items", {
+        db.view(design + "/today_documents", {
             descending : "true",
             limit : limit,
             skip : skip,
@@ -59,7 +46,29 @@ $(function() {
             }
         });
     };
-    drawItems(items_skip, items_limit);
+    function drawYesterdayItems(skip , limit) {
+        //console.log(design);
+        $("#loading_img").css("visibility","visible");
+        db.view(design + "/yesterday_documents", {
+            descending : "true",
+            limit : limit,
+            skip : skip,
+            update_seq : true,
+            success : function(data) {
+                //setupChanges(data.update_seq);
+                total_rows_count = data.total_rows;
+                fetched_rows_count = data.rows.length;
+                $("#counter").text(fetched_rows_count+" results");
+                var them = $.mustache($("#recent-messages").html(), {
+                    items : data.rows.map(function(r) {return r.value;})
+                });
+                $("#content").html(them);
+                $("#loading_img").css("visibility","hidden");
+                clearFields();
+            }
+        });
+    };
+    drawTodayItems(items_skip, items_limit);
     var changesRunning = false;
     function setupChanges(since) {
         if (!changesRunning) {
