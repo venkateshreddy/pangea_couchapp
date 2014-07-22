@@ -93,7 +93,7 @@ $(function() {
         else{
             view_name = "today_documents";
         }
-        drawItems();
+        drawItems(items_skip, items_limit);
     });
     $("#request_type").change(function(){
         request_type = $(this).val();
