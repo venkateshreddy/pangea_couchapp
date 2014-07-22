@@ -6,7 +6,10 @@ function(doc) {
 	                return (month < 10 ? '0' : '') + month
 	        }
 	 }
-	 if(parseInt(doc.created_time)>parseInt(getTodayDateString())){
+	 var ct = doc.created_time;
+	 if(typeof ct === 'undefined')
+	 	return;
+	 if(parseInt(ct)>parseInt(getTodayDateString())){
 		 emit(doc._id, {
 		      _id : doc._id,
 		      url : doc.url,
