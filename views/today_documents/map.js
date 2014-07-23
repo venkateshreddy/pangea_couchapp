@@ -1,7 +1,7 @@
 function(doc) {
 	 function getTodayDateString(){
 	        date_temp = new Date();
-	        return date_temp.getFullYear()+""+roundMonth(date_temp.getMonth()+1)+""+date_temp.getDate();
+	        return date_temp.getFullYear()+""+roundMonth(date_temp.getMonth()+1)+""+date_temp.getDate()+"000000";
 	        function roundMonth(month){
 	                return (month < 10 ? '0' : '') + month
 	        }
