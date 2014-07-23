@@ -21,7 +21,7 @@ $(function() {
         design = path[3],
         db = $.couch.db(path[1]);
 
-    var items_limit = 100;
+    var items_limit = 50;
     var items_skip = 0;
     var total_rows_count = 0;
     var view_name = "today_documents";
@@ -94,7 +94,7 @@ $(function() {
             view_name = "today_documents";
         }
         drawItems(items_skip, items_limit);
-        $("#documents_count").selectedIndex = 1;
+        $("#documents_count").selectedIndex = 0;
     });
     $("#request_type").change(function(){
         request_type = $(this).val();
