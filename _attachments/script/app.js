@@ -94,6 +94,7 @@ $(function() {
             view_name = "today_documents";
         }
         drawItems(items_skip, items_limit);
+        $("#documents_count").selectedIndex = 1;
     });
     $("#request_type").change(function(){
         request_type = $(this).val();
