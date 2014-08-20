@@ -1,5 +1,16 @@
+function showTime(){
+    var d = new Date(),
+    minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
+    hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
+    ampm = d.getHours() >= 12 ? 'pm' : 'am',
+    months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    total_time =  days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes+ampm;
+    $("#current_time").html(total_time);
+}
 // Apache 2.0 J Chris Anderson 2011
 $(function() {   
+    showTime();
     // friendly helper http://tinyurl.com/6aow6yn
     $.fn.serializeObject = function() {
         var o = {};
